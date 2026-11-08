@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-静态站点生成器：从 data/articles.json 生成 index.html、分类页、详情页
+静态站点生成器：从 data/articles.json 生成 index.html、分类页、详情页、历史归档
 """
 import json
 import os
@@ -103,6 +103,7 @@ def generate_index(data):
     nav_html = '<a href="index.html" class="active">首页</a>'
     for cat in data['categories']:
         nav_html += f'<a href="category/{cat["id"]}.html">{cat["icon"]} {cat["name"]}</a>'
+    nav_html += '<a href="history/">历史</a>'
 
     # JSON-LD structured data for homepage
     json_ld = {
@@ -146,6 +147,7 @@ def generate_category_pages(data):
         for c in data['categories']:
             active = ' class="active"' if c['id'] == cat['id'] else ''
             nav_html += f'<a href="../category/{c["id"]}.html"{active}>{c["icon"]} {c["name"]}</a>'
+        nav_html += '<a href="../history/">历史</a>'
 
         articles_html = ''
         for art in cat_articles:
@@ -210,6 +212,7 @@ def generate_article_pages(data):
         nav_html = '<a href="index.html">首页</a>'
         for c in data['categories']:
             nav_html += f'<a href="category/{c["id"]}.html">{c["icon"]} {c["name"]}</a>'
+        nav_html += '<a href="history/">历史</a>'
 
         # Related articles (same category, exclude current)
         related = [a for a in data['articles'] if a['category'] == art['category'] and a['id'] != art['id']][:3]
@@ -332,6 +335,181 @@ def generate_sitemap(data):
         f.write(sitemap)
     print("✅ Generated sitemap.xml")
 
+def generate_history_index(data):
+    """生成历史归档索引页"""
+    nav_html = '<a href="../index.html">首页</a>'
+    for c in data['categories']:
+        nav_html += f'<a href="../category/{c["id"]}.html">{c["icon"]} {c["name"]}</a>'
+    nav_html += '<a href="../history/" class="active">历史</a>'
+
+    # 扫描历史目录
+    history_dir = OUTPUT_DIR / 'history'
+    if not history_dir.exists():
+        years_html = '<p class="empty-history">暂无历史归档</p>'
+    else:
+        years = sorted([d.name for d in history_dir.iterdir() if d.is_dir()], reverse=True)
+        years_html = ''
+        for year in years:
+            year_dir = history_dir / year
+            months = sorted([d.name for d in year_dir.iterdir() if d.is_dir()], reverse=True)
+            years_html += f'''
+            <details class="year-group" open>
+                <summary><span class="year-badge">{year}年</span></summary>
+                <div class="month-list">'''
+            for month in months:
+                month_dir = year_dir / month
+                days = sorted([f.stem for f in month_dir.glob('*.html')], reverse=True)
+                years_html += f'''
+                    <details class="month-group">
+                        <summary>{int(month)}月</summary>
+                        <ul class="day-list">'''
+                for day in days:
+                    years_html += f'''
+                            <li><a href="{year}/{month}/{day}.html">{int(day)}日</a></li>'''
+                years_html += '''
+                        </ul>
+                    </details>'''
+            years_html += '''
+                </div>
+            </details>'''
+
+    json_ld = {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": f"历史归档 - {data['site']['name']}",
+        "description": f"{data['site']['name']}历史每日首页归档，按年月日分类浏览",
+    }
+
+    context = {
+        'site_name': data['site']['name'],
+        'site_description': data['site']['description'],
+        'site_url': data['site']['url'],
+        'page_title': f"历史归档 - {data['site']['name']}",
+        'page_description': f"{data['site']['name']}历史每日首页归档",
+        'canonical_url': f"{data['site']['url']}history/",
+        'og_image': '',
+        'json_ld': json.dumps(json_ld, ensure_ascii=False),
+        'nav_links': nav_html,
+        'years_html': years_html,
+        'current_year': datetime.now().year,
+    }
+
+    html = render_template('history.html', context)
+    history_dir = OUTPUT_DIR / 'history'
+    history_dir.mkdir(exist_ok=True)
+    with open(history_dir / 'index.html', 'w', encoding='utf-8') as f:
+        f.write(html)
+    print("✅ Generated history/index.html")
+
+def archive_today(data):
+    """将今日首页归档到 history/YYYY/MM/DD.html"""
+    now = datetime.now()
+    year = now.strftime('%Y')
+    month = now.strftime('%m')
+    day = now.strftime('%d')
+
+    # 生成今日首页内容（复用 generate_index 的逻辑，但不写入 index.html）
+    site = data['site']
+    featured = next((a for a in data['articles'] if a.get('featured')), data['articles'][0])
+    other_articles = [a for a in data['articles'] if not a.get('featured')]
+
+    cat = get_category_info(data, featured['category'])
+    hero_html = f'''
+    <article class="hero-article" itemscope itemtype="https://schema.org/NewsArticle">
+        <meta itemprop="datePublished" content="{format_datetime(featured['publishedAt'])}">
+        <meta itemprop="dateModified" content="{format_datetime(featured['updatedAt'])}">
+        <span class="category" style="background: {cat['color']};" itemprop="articleSection">{cat['icon']} {cat['name']}</span>
+        <h2 itemprop="headline">{featured['title']}</h2>
+        <p class="excerpt" itemprop="description">{featured['excerpt']}</p>
+        <div class="meta">
+            <span class="time" itemprop="datePublished" content="{format_datetime(featured['publishedAt'])}">{format_date(featured['publishedAt'])}</span>
+            <span class="source" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">{featured['author']}</span></span>
+            <span class="read-time">📖 {featured['readTime']} 分钟阅读</span>
+        </div>
+        <a href="../../{featured['slug']}.html" class="read-more" itemprop="url">阅读全文 →</a>
+    </article>'''
+
+    grid_articles = other_articles[:4]
+    grid_html = ''
+    for art in grid_articles:
+        cat = get_category_info(data, art['category'])
+        grid_html += f'''
+        <article class="news-card" itemscope itemtype="https://schema.org/NewsArticle">
+            <meta itemprop="datePublished" content="{format_datetime(art['publishedAt'])}">
+            <div class="card-image" style="background-image: url('{art['heroImage']}');"></div>
+            <div class="card-content">
+                <span class="category" style="background: {cat['color']}20; color: {cat['color']};" itemprop="articleSection">{cat['icon']} {cat['name']}</span>
+                <h3 itemprop="headline"><a href="../../{art['slug']}.html" itemprop="url">{art['title']}</a></h3>
+                <p itemprop="description">{art['excerpt']}</p>
+                <div class="meta">
+                    <span class="time" itemprop="datePublished" content="{format_datetime(art['publishedAt'])}">{format_date(art['publishedAt'])}</span>
+                    <span class="source" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">{art['author']}</span></span>
+                </div>
+            </div>
+        </article>'''
+
+    list_articles = other_articles[4:]
+    list_html = ''
+    for art in list_articles:
+        cat = get_category_info(data, art['category'])
+        list_html += f'''
+        <article class="list-item" itemscope itemtype="https://schema.org/NewsArticle">
+            <meta itemprop="datePublished" content="{format_datetime(art['publishedAt'])}">
+            <div class="list-image" style="background-image: url('{art['heroImage']}');"></div>
+            <div class="list-content">
+                <span class="category" style="background: {cat['color']}20; color: {cat['color']};" itemprop="articleSection">{cat['icon']} {cat['name']}</span>
+                <h3 itemprop="headline"><a href="../../{art['slug']}.html" itemprop="url">{art['title']}</a></h3>
+                <p itemprop="description">{art['excerpt']}</p>
+                <div class="meta">
+                    <span class="time" itemprop="datePublished" content="{format_datetime(art['publishedAt'])}">{format_date(art['publishedAt'])}</span>
+                    <span class="source" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">{art['author']}</span></span>
+                    <span class="read-time">📖 {art['readTime']} 分钟</span>
+                </div>
+            </div>
+        </article>'''
+
+    # 归档页导航（返回历史索引）
+    nav_html = '<a href="../../index.html">首页</a>'
+    for c in data['categories']:
+        nav_html += f'<a href="../../category/{c["id"]}.html">{c["icon"]} {c["name"]}</a>'
+    nav_html += '<a href="../../history/" class="active">历史</a>'
+
+    # 归档页标题
+    archive_date = f"{year}年{int(month)}月{int(day)}日"
+
+    context = {
+        'site_name': site['name'],
+        'site_description': site['description'],
+        'site_url': site['url'],
+        'page_title': f"{archive_date} - 历史归档 - {site['name']}",
+        'page_description': f"{site['name']} {archive_date} 首页快照",
+        'canonical_url': f"{site['url']}history/{year}/{month}/{day}.html",
+        'og_image': featured['heroImage'],
+        'json_ld': json.dumps({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": f"{archive_date} 首页快照",
+            "description": f"{site['name']} {archive_date} 的首页内容归档",
+            "datePublished": now.strftime('%Y-%m-%dT%H:%M:%S%z'),
+        }, ensure_ascii=False),
+        'nav_links': nav_html,
+        'archive_date': archive_date,
+        'hero_article': hero_html,
+        'grid_cards': grid_html,
+        'list_items': list_html,
+        'current_year': datetime.now().year,
+    }
+
+    html = render_template('archive.html', context)
+    archive_dir = OUTPUT_DIR / 'history' / year / month
+    archive_dir.mkdir(parents=True, exist_ok=True)
+    archive_file = archive_dir / f"{day}.html"
+    with open(archive_file, 'w', encoding='utf-8') as f:
+        f.write(html)
+    print(f"✅ Archived today to history/{year}/{month}/{day}.html")
+
+    return archive_file
+
 def main():
     data = load_data()
     generate_index(data)
@@ -339,6 +517,8 @@ def main():
     generate_article_pages(data)
     generate_rss(data)
     generate_sitemap(data)
+    archive_today(data)
+    generate_history_index(data)
     print("\n🎉 All pages generated successfully!")
 
 if __name__ == '__main__':

@@ -808,3 +808,231 @@ img {
         color: #333 !important;
     }
 }
+
+/* History Archive Page */
+.history-archive {
+    margin-top: 24px;
+}
+
+.year-group {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.year-group summary {
+    padding: 20px 24px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a1a2e;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.2s;
+}
+
+.year-group summary::-webkit-details-marker {
+    display: none;
+}
+
+.year-group summary:hover {
+    background: #f8faff;
+}
+
+.year-badge {
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.month-list {
+    padding: 0 24px 20px;
+}
+
+.month-group {
+    border-left: 2px solid #eef2ff;
+    padding-left: 20px;
+    margin: 12px 0;
+}
+
+.month-group summary {
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+    cursor: pointer;
+    list-style: none;
+    transition: color 0.2s;
+}
+
+.month-group summary::-webkit-details-marker {
+    display: none;
+}
+
+.month-group summary:hover {
+    color: #2563eb;
+}
+
+.day-list {
+    list-style: none;
+    padding: 8px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.day-list li a {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #f3f4f6;
+    color: #555;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.day-list li a:hover {
+    background: #2563eb;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.empty-history {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+    font-size: 1.1rem;
+}
+
+/* Archive Page */
+.archive-header {
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 40px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border-left: 6px solid #7c3aed;
+}
+
+.archive-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 12px 0;
+}
+
+.archive-notice {
+    color: #666;
+    font-size: 1rem;
+    margin-top: 16px;
+}
+
+.archive-notice a {
+    color: #2563eb;
+    font-weight: 500;
+}
+
+.archive-notice a:hover {
+    text-decoration: underline;
+}
+
+.archive-breadcrumb {
+    font-size: 0.95rem;
+    color: #999;
+    margin-bottom: 12px;
+}
+
+.archive-breadcrumb a {
+    color: #666;
+}
+
+.archive-breadcrumb a:hover {
+    color: #2563eb;
+}
+
+.archive-breadcrumb span {
+    margin: 0 8px;
+}
+
+.archive-nav {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #eef2ff;
+}
+
+.btn-back,
+.btn-current {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.btn-back {
+    background: #f3f4f6;
+    color: #555;
+}
+
+.btn-back:hover {
+    background: #e5e7eb;
+    color: #333;
+}
+
+.btn-current {
+    background: #2563eb;
+    color: #fff;
+}
+
+.btn-current:hover {
+    background: #1d4ed8;
+    transform: translateX(4px);
+}
+
+/* Responsive for History/Archive */
+@media (max-width: 768px) {
+    .year-group summary {
+        padding: 16px;
+        font-size: 1.1rem;
+    }
+    
+    .month-group {
+        padding-left: 16px;
+    }
+    
+    .day-list li a {
+        padding: 8px 16px;
+        font-size: 0.95rem;
+    }
+    
+    .archive-header h1 {
+        font-size: 2rem;
+    }
+    
+    .archive-nav {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-back,
+    .btn-current {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}
