@@ -1,0 +1,3 @@
+# 自定义域名配置
+# 取消注释并替换为你的域名后，在 DNS 添加 CNAME 记录指向 yww006.github.io
+# www.yourdomain.com
