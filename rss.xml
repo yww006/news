@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>每日新闻</title>
+    <link>https://yww006.github.io/news/</link>
+    <description>聚合全球科技、财经、体育、娱乐热点，每日精选优质资讯</description>
+    <language>zh-CN</language>
+    <atom:link href="https://yww006.github.io/news/rss.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Nov 2026 09:18:32 </lastBuildDate>
+    <generator>Custom Static Site Generator</generator>
+    <item>
+      <title><![CDATA[人工智能最新突破：新模型实现人类级推理能力]]></title>
+      <link>https://yww006.github.io/news/ai-breakthrough-2024.html</link>
+      <guid isPermaLink="true">https://yww006.github.io/news/ai-breakthrough-2024.html</guid>
+      <description><![CDATA[最新发布的大语言模型在多项基准测试中超越人类专家水平，标志着通用人工智能研究取得里程碑式进展。]]></description>
+      <pubDate>Mon, 15 Jan 2024 10:30:00 +0800</pubDate>
+      <category>科技</category>
+      <author>科技日报</author>
+      <enclosure url="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop" type="image/jpeg" />
+    </item>    <item>
+      <title><![CDATA[量子计算商用化迈出关键一步]]></title>
+      <link>https://yww006.github.io/news/quantum-computing-2024.html</link>
+      <guid isPermaLink="true">https://yww006.github.io/news/quantum-computing-2024.html</guid>
+      <description><![CDATA[IBM发布最新127量子位处理器，错误率降低至0.001%，为大规模量子应用铺平道路。]]></description>
+      <pubDate>Mon, 15 Jan 2024 08:15:00 +0800</pubDate>
+      <category>科技</category>
+      <author>Nature</author>
+      <enclosure url="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&h=630&fit=crop" type="image/jpeg" />
+    </item>    <item>
+      <title><![CDATA[全球央行数字货币试点加速推进]]></title>
+      <link>https://yww006.github.io/news/cbdc-global-2024.html</link>
+      <guid isPermaLink="true">https://yww006.github.io/news/cbdc-global-2024.html</guid>
+      <description><![CDATA[中国、欧盟、美国等主要经济体同步推进CBDC试点，跨境支付体系或将重构。]]></description>
+      <pubDate>Mon, 15 Jan 2024 06:45:00 +0800</pubDate>
+      <category>财经</category>
+      <author>财新网</author>
+      <enclosure url="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&h=630&fit=crop" type="image/jpeg" />
+    </item>    <item>
+      <title><![CDATA[巴黎奥运会筹备进入冲刺阶段]]></title>
+      <link>https://yww006.github.io/news/paris-olympics-2024.html</link>
+      <guid isPermaLink="true">https://yww006.github.io/news/paris-olympics-2024.html</guid>
+      <description><![CDATA[主场馆全部完工，志愿者招募超额完成，可持续发展理念贯穿全流程。]]></description>
+      <pubDate>Mon, 15 Jan 2024 04:20:00 +0800</pubDate>
+      <category>体育</category>
+      <author>新华社</author>
+      <enclosure url="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=1200&h=630&fit=crop" type="image/jpeg" />
+    </item>    <item>
+      <title><![CDATA[年度最佳电影提名揭晓，华语片入围三项大奖]]></title>
+      <link>https://yww006.github.io/news/oscars-2024-chinese-films.html</link>
+      <guid isPermaLink="true">https://yww006.github.io/news/oscars-2024-chinese-films.html</guid>
+      <description><![CDATA[第96届奥斯卡提名公布，中国电影《流浪地球3》入围最佳视觉效果等三项提名。]]></description>
+      <pubDate>Mon, 15 Jan 2024 02:10:00 +0800</pubDate>
+      <category>娱乐</category>
+      <author>娱乐周刊</author>
+      <enclosure url="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200&h=630&fit=crop" type="image/jpeg" />
+    </item>    <item>
+      <title><![CDATA[SpaceX星舰第七次试飞成功，可重复使用火箭技术成熟]]></title>
+      <link>https://yww006.github.io/news/spacex-starship-2024.html</link>
+      <guid isPermaLink="true">https://yww006.github.io/news/spacex-starship-2024.html</guid>
+      <description><![CDATA[超重型火箭一级和二级均实现精准回收着陆，单次发射成本有望降至1000万美元以下。]]></description>
+      <pubDate>Sun, 14 Jan 2024 22:00:00 +0800</pubDate>
+      <category>科技</category>
+      <author>SpaceNews</author>
+      <enclosure url="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=1200&h=630&fit=crop" type="image/jpeg" />
+    </item>    <item>
+      <title><![CDATA[新能源汽车渗透率突破50%，产业链迎来拐点]]></title>
+      <link>https://yww006.github.io/news/ev-penetration-2024.html</link>
+      <guid isPermaLink="true">https://yww006.github.io/news/ev-penetration-2024.html</guid>
+      <description><![CDATA[7月国内新能源汽车零售渗透率首次超过燃油车，宁德时代、比亚迪市值双双创新高。]]></description>
+      <pubDate>Sun, 14 Jan 2024 20:30:00 +0800</pubDate>
+      <category>财经</category>
+      <author>界面新闻</author>
+      <enclosure url="https://images.unsplash.com/photo-1593941707874-ef9e6b5e3e3c?w=1200&h=630&fit=crop" type="image/jpeg" />
+    </item>    <item>
+      <title><![CDATA[苹果发布Vision Pro 2，主打轻量化与AI交互]]></title>
+      <link>https://yww006.github.io/news/apple-vision-pro-2.html</link>
+      <guid isPermaLink="true">https://yww006.github.io/news/apple-vision-pro-2.html</guid>
+      <description><![CDATA[新款头显重量减轻30%，搭载M3芯片，引入眼动追踪+手势控制新交互范式。]]></description>
+      <pubDate>Sun, 14 Jan 2024 18:45:00 +0800</pubDate>
+      <category>科技</category>
+      <author>The Verge</author>
+      <enclosure url="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&h=630&fit=crop" type="image/jpeg" />
+    </item>    <item>
+      <title><![CDATA[网球新星阿尔卡拉斯夺得温网冠军，完成职业生涯大满贯]]></title>
+      <link>https://yww006.github.io/news/alcaraz-wimbledon-2024.html</link>
+      <guid isPermaLink="true">https://yww006.github.io/news/alcaraz-wimbledon-2024.html</guid>
+      <description><![CDATA[年仅21岁的西班牙选手直落三盘击败德约科维奇，成为最年轻全满贯获得者。]]></description>
+      <pubDate>Sun, 14 Jan 2024 16:20:00 +0800</pubDate>
+      <category>体育</category>
+      <author>ESPN</author>
+      <enclosure url="https://images.unsplash.com/photo-1554068800-4c5c4f8a3ff8?w=1200&h=630&fit=crop" type="image/jpeg" />
+    </item>
+  </channel>
+</rss>
