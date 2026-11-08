@@ -8,6 +8,7 @@
     <title>${page_title}</title>
     <link rel="canonical" href="${canonical_url}">
     <link rel="alternate" type="application/rss+xml" title="${site_name} RSS" href="${site_url}rss.xml">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="${site_url}sitemap.xml">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -26,9 +27,19 @@
     <!-- JSON-LD -->
     <script type="application/ld+json">${json_ld}</script>
 
+    <link rel="preconnect" href="https://images.unsplash.com">
     <link rel="stylesheet" href="../../assets/css/styles.css">
 </head>
 <body>
+    <!-- Archive notice banner -->
+    <div class="archive-banner" role="status" aria-live="polite">
+        <div class="container">
+            <span class="archive-icon" aria-hidden="true">📦</span>
+            <span class="archive-text">这是 <strong>${archive_date}</strong> 的首页快照归档</span>
+            <a href="../../index.html" class="archive-link">查看最新首页 →</a>
+        </div>
+    </div>
+
     <header class="header" role="banner">
         <div class="container">
             <h1 class="logo"><a href="../../index.html" aria-label="${site_name} 首页">${site_name}</a></h1>
@@ -40,14 +51,6 @@
 
     <main class="main" role="main">
         <div class="container">
-            <header class="archive-header">
-                <nav class="archive-breadcrumb" aria-label="面包屑">
-                    <a href="../../history/">历史归档</a> <span>›</span> <span>${archive_date}</span>
-                </nav>
-                <h1>${archive_date} 首页快照</h1>
-                <p class="archive-notice">📌 这是 ${archive_date} 的首页内容归档，仅供参考。查看 <a href="../../index.html">最新首页</a>。</p>
-            </header>
-
             <section class="hero" aria-labelledby="hero-heading">
                 <h2 id="hero-heading" class="sr-only">头条新闻</h2>
                 ${hero_article}
@@ -62,11 +65,6 @@
                 <h2 id="list-heading" class="section-title">最新资讯</h2>
                 ${list_items}
             </section>
-
-            <nav class="archive-nav" aria-label="归档导航">
-                <a href="../../history/" class="btn-back">← 返回历史归档</a>
-                <a href="../../index.html" class="btn-current">查看最新首页 →</a>
-            </nav>
         </div>
     </main>
 

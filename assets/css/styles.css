@@ -49,6 +49,81 @@ img {
     z-index: 100;
 }
 
+/* Archive Banner */
+.archive-banner {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    border-bottom: 1px solid #ffd54f;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 101;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.archive-banner .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.archive-icon {
+    font-size: 1.1rem;
+}
+
+.archive-text {
+    font-size: 0.95rem;
+    color: #856404;
+    font-weight: 500;
+}
+
+.archive-text strong {
+    color: #5d4e00;
+}
+
+.archive-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #2563eb;
+    color: #fff !important;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.2s;
+    white-space: nowrap;
+}
+
+.archive-link:hover {
+    background: #1d4ed8;
+    transform: translateX(4px);
+    color: #fff !important;
+}
+
+/* Responsive for Archive Banner */
+@media (max-width: 768px) {
+    .archive-banner .container {
+        gap: 8px;
+        text-align: center;
+    }
+    
+    .archive-text {
+        font-size: 0.9rem;
+        order: 3;
+        width: 100%;
+    }
+    
+    .archive-link {
+        order: 2;
+    }
+    
+    .archive-icon {
+        order: 1;
+    }
+}
+
 .header .container {
     display: flex;
     justify-content: space-between;
@@ -910,98 +985,6 @@ img {
     padding: 60px 20px;
     color: #999;
     font-size: 1.1rem;
-}
-
-/* Archive Page */
-.archive-header {
-    text-align: center;
-    padding: 40px 20px;
-    margin-bottom: 40px;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    border-left: 6px solid #7c3aed;
-}
-
-.archive-header h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin: 12px 0;
-}
-
-.archive-notice {
-    color: #666;
-    font-size: 1rem;
-    margin-top: 16px;
-}
-
-.archive-notice a {
-    color: #2563eb;
-    font-weight: 500;
-}
-
-.archive-notice a:hover {
-    text-decoration: underline;
-}
-
-.archive-breadcrumb {
-    font-size: 0.95rem;
-    color: #999;
-    margin-bottom: 12px;
-}
-
-.archive-breadcrumb a {
-    color: #666;
-}
-
-.archive-breadcrumb a:hover {
-    color: #2563eb;
-}
-
-.archive-breadcrumb span {
-    margin: 0 8px;
-}
-
-.archive-nav {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 40px;
-    padding-top: 24px;
-    border-top: 1px solid #eef2ff;
-}
-
-.btn-back,
-.btn-current {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: background 0.2s, color 0.2s, transform 0.2s;
-}
-
-.btn-back {
-    background: #f3f4f6;
-    color: #555;
-}
-
-.btn-back:hover {
-    background: #e5e7eb;
-    color: #333;
-}
-
-.btn-current {
-    background: #2563eb;
-    color: #fff;
-}
-
-.btn-current:hover {
-    background: #1d4ed8;
-    transform: translateX(4px);
 }
 
 /* Responsive for History/Archive */
