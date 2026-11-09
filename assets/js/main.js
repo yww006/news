@@ -21,13 +21,18 @@
 
         navLinks.forEach(link => {
             link.addEventListener('click', function(e) {
+                const category = this.textContent.trim();
+                
+                // 历史链接需要正常跳转，不阻止默认行为
+                if (category === '历史') {
+                    return;
+                }
+                
                 e.preventDefault();
 
                 // 更新激活状态
                 navLinks.forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
-
-                const category = this.textContent.trim();
 
                 // 这里可以接入真实 API 筛选
                 console.log('筛选分类:', category);
