@@ -17,6 +17,9 @@ def load_data():
     with open(DATA_FILE, 'r', encoding='utf-8') as f:
         return json.load(f)
 
+# 构建版本号（用于静态资源缓存失效）
+BUILD_VERSION = datetime.now().strftime('%Y%m%d%H%M')
+
 def format_date(dt_str):
     dt = datetime.fromisoformat(dt_str.replace('Z', '+00:00'))
     return dt.strftime('%Y年%m月%d日')
@@ -132,6 +135,7 @@ def generate_index(data):
         'grid_cards': grid_html,
         'list_items': list_html,
         'current_year': datetime.now().year,
+        'build_version': BUILD_VERSION,
     }
 
     html = render_template('index.html', context)
@@ -265,6 +269,7 @@ def generate_article_pages(data):
             'article_content': art['content'],
             'related_articles': related_html,
             'current_year': datetime.now().year,
+            'build_version': BUILD_VERSION,
         }
 
         html = render_template('article.html', context)
@@ -392,6 +397,7 @@ def generate_history_index(data):
         'nav_links': nav_html,
         'years_html': years_html,
         'current_year': datetime.now().year,
+        'build_version': BUILD_VERSION,
     }
 
     html = render_template('history.html', context)
@@ -501,6 +507,7 @@ def archive_today(data):
         'grid_cards': grid_html,
         'list_items': list_html,
         'current_year': datetime.now().year,
+        'build_version': BUILD_VERSION,
     }
 
     html = render_template('archive.html', context)
