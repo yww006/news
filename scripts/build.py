@@ -414,6 +414,9 @@ def archive_today(data):
     other_articles = [a for a in data['articles'] if not a.get('featured')]
 
     cat = get_category_info(data, featured['category'])
+    # 归档页使用今日日期作为显示日期
+    today_display = format_date(now.isoformat())
+    today_iso = now.strftime('%Y-%m-%dT%H:%M:%S%z')
     hero_html = f'''
     <article class="hero-article" itemscope itemtype="https://schema.org/NewsArticle">
         <meta itemprop="datePublished" content="{format_datetime(featured['publishedAt'])}">
@@ -422,7 +425,7 @@ def archive_today(data):
         <h2 itemprop="headline">{featured['title']}</h2>
         <p class="excerpt" itemprop="description">{featured['excerpt']}</p>
         <div class="meta">
-            <span class="time" itemprop="datePublished" content="{format_datetime(featured['publishedAt'])}">{format_date(featured['publishedAt'])}</span>
+            <span class="time" itemprop="datePublished" content="{today_iso}">{today_display}</span>
             <span class="source" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">{featured['author']}</span></span>
             <span class="read-time">📖 {featured['readTime']} 分钟阅读</span>
         </div>
