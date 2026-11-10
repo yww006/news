@@ -44,6 +44,11 @@ def generate_index(data):
     featured = next((a for a in data['articles'] if a.get('featured')), data['articles'][0])
     other_articles = [a for a in data['articles'] if not a.get('featured')]
 
+    # 首页显示今日日期（仅可见日期，schema.org 保持原文日期）
+    now = datetime.now()
+    today_display = format_date(now.isoformat())
+    today_iso = now.strftime('%Y-%m-%dT%H:%M:%S%z')
+
     # Hero article
     cat = get_category_info(data, featured['category'])
     hero_html = f'''
@@ -54,7 +59,7 @@ def generate_index(data):
         <h2 itemprop="headline">{featured['title']}</h2>
         <p class="excerpt" itemprop="description">{featured['excerpt']}</p>
         <div class="meta">
-            <span class="time" itemprop="datePublished" content="{format_datetime(featured['publishedAt'])}">{format_date(featured['publishedAt'])}</span>
+            <span class="time" itemprop="datePublished" content="{today_iso}">{today_display}</span>
             <span class="source" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">{featured['author']}</span></span>
             <span class="read-time">📖 {featured['readTime']} 分钟阅读</span>
         </div>
@@ -75,7 +80,7 @@ def generate_index(data):
                 <h3 itemprop="headline"><a href="{art['slug']}.html" itemprop="url">{art['title']}</a></h3>
                 <p itemprop="description">{art['excerpt']}</p>
                 <div class="meta">
-                    <span class="time" itemprop="datePublished" content="{format_datetime(art['publishedAt'])}">{format_date(art['publishedAt'])}</span>
+                    <span class="time" itemprop="datePublished" content="{today_iso}">{today_display}</span>
                     <span class="source" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">{art['author']}</span></span>
                 </div>
             </div>
@@ -95,7 +100,7 @@ def generate_index(data):
                 <h3 itemprop="headline"><a href="{art['slug']}.html" itemprop="url">{art['title']}</a></h3>
                 <p itemprop="description">{art['excerpt']}</p>
                 <div class="meta">
-                    <span class="time" itemprop="datePublished" content="{format_datetime(art['publishedAt'])}">{format_date(art['publishedAt'])}</span>
+                    <span class="time" itemprop="datePublished" content="{today_iso}">{today_display}</span>
                     <span class="source" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">{art['author']}</span></span>
                     <span class="read-time">📖 {art['readTime']} 分钟</span>
                 </div>
